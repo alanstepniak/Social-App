@@ -1,45 +1,35 @@
 import React from 'react';
 import axios from 'axios';
+import '../Home.css';
 
 export default class Home extends React.Component {
     state = {
-      posts: []
+        posts: []
     }
-  
+
     componentDidMount() {
-      axios.get(`https://akademia108.pl/api/social-app/user/signup`)
-        .then(res => {
-          const posts = res.data;
-          this.setState({ posts });
-        })
+        axios.post("https://akademia108.pl/api/social-app/post/latest")
+            .then((res) => {
+                this.setState({ posts: res.data });
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     }
-  
+
     render() {
-      return (
-        <div className="App">
-        
-        <nav>
-        <Link to="/" id='home'>home</Link>
-        <Link to="/login" id='login'>login</Link>
-        <Link to="/signup" id='signUp'>sign up</Link>
-        </nav>
-        <Routes>
-        
-          <Route index path="/" element={<Home />} />
-          <Route path="login" element={<Login />} />
-          <Route path="signUp" element={<SignUp />} />
-        
-      </Routes>
-  
-      <ul>
-          {
-            this.state.posts
-              .map(posts =>
-                <li key={posts.id}>{posts.name}</li>
-              )
-          }
-        </ul>
-      </div>
-      )
+        return (
+            <div>
+                <h2>posty</h2>
+                <ul>
+                    {
+                        this.state.posts
+                            .map(post =>
+                                <li key={post.id}><span className='name'>{post.user.username}</span> <span className='date'>{post.created_at.substring(0, 10)}</span> <img src={post.user.avatar_url} alt="avatar" /> <span className='content'>{post.content}</span>  </li>
+                            )
+                    }
+                </ul>
+            </div>
+        )
     }
-  }
+}
