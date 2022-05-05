@@ -29,7 +29,9 @@ export default class Home extends React.Component {
                             )
                     }
                 </ul>
+                <input className='login' type='submit' value='Load more' onClick={axios.post('https://akademia108.pl/api/social-app/post/older-then') }></input>
             </div>
         )
+        document.getElementsByTagName('input').disabled = true;
     }
 }

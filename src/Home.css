@@ -26,3 +26,9 @@ img {
     right: 5%;
     border-radius: 50%;
 }
+
+input:hover {
+    background-color:blue;
+    cursor: pointer;
+    transition: all 1s;
+}
