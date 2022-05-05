@@ -4,7 +4,7 @@ import '../Home.css';
 
 export default class Home extends React.Component {
     state = {
-        posts: []
+        posts: [],
     }
 
     componentDidMount() {
@@ -16,6 +16,14 @@ export default class Home extends React.Component {
                 console.error(error);
             });
     }
+
+    loadMore = () => { axios.post('https://akademia108.pl/api/social-app/post/older-then')  
+    .then((res) => {
+        this.setState({ posts: res.data });
+    })
+    .catch((error) => {
+        console.error(error);
+    }); }
 
     render() {
         return (
@@ -29,7 +37,7 @@ export default class Home extends React.Component {
                             )
                     }
                 </ul>
-                <input className='login' type='submit' value='Load more' onClick={axios.post('https://akademia108.pl/api/social-app/post/older-then') }></input>
+                <button onClick={this.loadMore}>Load more</button>
             </div>
         )
         document.getElementsByTagName('input').disabled = true;

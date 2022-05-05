@@ -27,7 +27,17 @@ img {
     border-radius: 50%;
 }
 
-input:hover {
+button {
+    display: block;
+    margin:10px auto;
+    border:none;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 30px;
+    background-color: black;
+}
+
+button:hover {
     background-color:blue;
     cursor: pointer;
     transition: all 1s;
